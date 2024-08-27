@@ -13,30 +13,31 @@ require __DIR__ . '/../vendor/autoload.php';
 // create the container 
 $container = new Container();
 
+$container->set('templating', function () {
+    return new Mustache_Engine([
+        'loader' => new Mustache_Loader_FilesystemLoader(
+            __DIR__ . '/../templates',
+            ['extension' => '']
+        )
+    ]);
+});
+
 AppFactory::setContainer($container);
 
 // Instantiate App
 $app = AppFactory::create();
 
 // Define app routes
+$app->get('/hello/{parameters}', function (Request $request, Response $response, array $args = []) use ($container) {
+    
+    $templating = $container->get('templating');
+    
+    $html = $templating->render('hello.html', [
+        'name' => $args['parameters']
+    ]);
 
-// 1st route
-$app->get('/', function (Request $request, Response $response) {
-    $response->getBody()->write("Hello, SlimPhP!");
-    return $response;
-});
+    $response->getBody()->write($html);
 
-// 2nd route
-$app->get('/hello/jing', function (Request $request, Response $response) {
-    $response->getBody()->write("Hello, Jing");
-    return $response;
-});
-
-// 3nd route by using a parameter
-// array $args = parameters 
-$app->get('/hello/{name}', function (Request $request, Response $response, array $args) {
-    $name = ucfirst($args['name']);
-    $response->getBody()->write(sprintf("Hello, %s!", $name));
     return $response;
 });
 
