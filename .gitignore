@@ -1,0 +1,11 @@
+@"
+# Ignorer le dossier vendor
+/vendor/
+
+# # Ignorer le fichier composer.lock
+# /composer.lock
+# /composer.json
+
+# # Ignorer les fichiers de configuration de l'environnement
+# /.env
+# "@ > .gitignore
