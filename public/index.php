@@ -27,18 +27,6 @@ AppFactory::setContainer($container);
 // Instantiate App
 $app = AppFactory::create();
 
-// Define app routes
-$app->get('/hello/{parameters}', function (Request $request, Response $response, array $args = []) {
-    
-    $templating = $this->get('templating');
-    
-    $html = $templating->render('hello.html', [
-        'name' => ucfirst($args['parameters'])
-    ]);
-
-    $response->getBody()->write($html);
-
-    return $response;
-});
+$app->get('/', '\App\Controller\firstController:homepage');
 
 $app->run();
