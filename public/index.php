@@ -29,6 +29,8 @@ $app = AppFactory::create();
 
 $app->get('/', '\App\Controller\SearchController:default');
 
+$app->get('/api', '\App\Controller\ApiController:search');
+
 $app->any('/form', '\App\Controller\SearchController:form');
 
 $app->run();
