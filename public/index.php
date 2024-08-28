@@ -27,6 +27,7 @@ AppFactory::setContainer($container);
 // Instantiate App
 $app = AppFactory::create();
 
-$app->get('/', '\App\Controller\firstController:homepage');
+$app->get('/', '\App\Controller\FirstController:homepage');
+$app->get('/hello', '\App\Controller\SecondController:hello');
 
 $app->run();
