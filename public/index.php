@@ -28,12 +28,12 @@ AppFactory::setContainer($container);
 $app = AppFactory::create();
 
 // Define app routes
-$app->get('/hello/{parameters}', function (Request $request, Response $response, array $args = []) use ($container) {
+$app->get('/hello/{parameters}', function (Request $request, Response $response, array $args = []) {
     
-    $templating = $container->get('templating');
+    $templating = $this->get('templating');
     
     $html = $templating->render('hello.html', [
-        'name' => $args['parameters']
+        'name' => ucfirst($args['parameters'])
     ]);
 
     $response->getBody()->write($html);
