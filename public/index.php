@@ -27,7 +27,6 @@ AppFactory::setContainer($container);
 // Instantiate App
 $app = AppFactory::create();
 
-$app->get('/', '\App\Controller\FirstController:homepage');
-$app->get('/hello', '\App\Controller\SecondController:hello');
+$app->get('/', '\App\Controller\SearchController:default');
 
 $app->run();
