@@ -15,13 +15,14 @@ class SearchController extends Controller
         return $html;
     }
 
-    public function search(Request $request, Response $response)
+    public function form(Request $request, Response $response)
     {
         // load the album data from a JSON File and decode it into a PHP array
         $albums = json_decode(file_get_contents(__DIR__ . '/../../data/albums.json'), true);
 
         // Get the 'q' query parameter from the request, defaulting to an empty string if it's not set
-        $query = $request->getQueryParams()['q'] ?? '';
+        $postData = $request->getParsedBody();
+        $query = $postData ['q'] ?? '';
 
         if ($query) {
 
@@ -36,7 +37,7 @@ class SearchController extends Controller
 
         $html = $this->render(
             $response,
-            'search.html',
+            'form.html',
             ['albums' => $albums, 'query' => $query]
         );
         return $html;
