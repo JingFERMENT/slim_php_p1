@@ -31,6 +31,8 @@ $app->get('/', '\App\Controller\ShopController:default');
 // handle when the details is not numeric
 $app->get('/details/{id}:[0-9]+', '\App\Controller\ShopController:details');
 
+$errorMiddleware = $app->addErrorMiddleware(true, true, true);
+
 // $app->get('/', '\App\Controller\SearchController:default');
 // $app->get('/api', '\App\Controller\ApiController:search');
 // $app->any('/form', '\App\Controller\SearchController:form');
