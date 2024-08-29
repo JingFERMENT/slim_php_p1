@@ -15,9 +15,15 @@ class ApiController extends Controller
         // Get the 'q' query parameter from the request, defaulting to an empty string if it's not set
         $query = $request->getQueryParams()['q'] ?? '';
 
+        if ($query == '') {
+            // status 400: invalid request
+            $response->getBody()->write(json_encode(['Error, invalid request!']));
+            return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
+        }
+
         if ($query) {
 
-        // Filter the albums array to only include albums where the title or artist contains the query string
+            // Filter the albums array to only include albums where the title or artist contains the query string
             $albums = array_values(array_filter($albums, function (
                 $album
             ) use ($query) {
