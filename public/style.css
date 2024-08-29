@@ -1,3 +1,7 @@
+a:link, a:visited, a:hover, a:active {
+    color: #000;
+}
+
 body {
     font-family: 'Open Sans', Helvetica, sans-serif;
     margin: 0;
@@ -15,35 +19,24 @@ header span {
     color: #467575;
 }
 
-form {
-    margin: 24px 0;
-}
-
-form button {
-    background-color: #467575;
-    border: none;
-    border-radius: 0;
-    color: #fff;
-    font-size: 100%;
-    padding: 16px;
-}
-
-form input {
-    box-sizing: border-box;
-    border: #467575 1px solid;
-    border-radius: 0;
-    font-size: 100%;
-    padding: 15px;
-}
-
-.albums {
+.bikes {
     display: grid;
     grid-gap: 12px;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }
 
-.albums > div {
-    background: linear-gradient(to bottom, #fff -5%, #65A7A8 120%);
+.bikes > div {
+    border: #999 1px solid;
+    border-radius: 6px;
     padding: 12px;
     text-align: center;
+}
+
+.bikes > div span {
+    font-size: 400%;
+}
+
+.bike-icon {
+    font-size: 1000%;
+    margin: 0;
 }
