@@ -28,6 +28,8 @@ AppFactory::setContainer($container);
 $app = AppFactory::create();
 
 $app->get('/', '\App\Controller\ShopController:default');
+// handle when the details is not numeric
+$app->get('/details/{id}:[0-9]+', '\App\Controller\ShopController:details');
 
 // $app->get('/', '\App\Controller\SearchController:default');
 // $app->get('/api', '\App\Controller\ApiController:search');
