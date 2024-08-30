@@ -28,26 +28,26 @@ AppFactory::setContainer($container);
 // Instantiate App
 $app = AppFactory::create();
 
-$app->get('/', '\App\Controller\ShopController:default');
-// handle when the details is not numeric
-$app->get('/details/{id:[0-9]+}', '\App\Controller\ShopController:details');
+$app->get('/', '\App\Controller\AuthController:login');
+$app->get('/secure', '\App\Controller\SecureController:default');
+
+// $app->get('/', '\App\Controller\ShopController:default');
+// // handle when the details is not numeric
+// $app->get('/details/{id:[0-9]+}', '\App\Controller\ShopController:details');
 
 // Add Error Middleware
 // put "false" in production 
-$errorMiddleware = $app->addErrorMiddleware(true, true, true);
-
+// $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
 // Set Custom Error Handler for 404 Not Found
-$errorMiddleware->setErrorHandler(
-    Slim\Exception\HttpNotFoundException::class, function(
-        Psr\Http\Message\ServerRequestInterface $request) use ($container) {
-            $controller = new App\Controller\ExceptionController(
-                $container);
-            return $controller->notFound($request);
-        }
-
-);
-
+// $errorMiddleware->setErrorHandler(
+//     Slim\Exception\HttpNotFoundException::class, function(
+//         Psr\Http\Message\ServerRequestInterface $request) use ($container) {
+//             $controller = new App\Controller\ExceptionController(
+//                 $container);
+//             return $controller->notFound($request);
+//         }
+// );
 
 // $app->get('/', '\App\Controller\SearchController:default');
 // $app->get('/api', '\App\Controller\ApiController:search');
