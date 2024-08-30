@@ -22,11 +22,16 @@ $container->set('templating', function () {
     ]);
 });
 
-AppFactory::setContainer($container);
+$container->set('session', function(){
+    return new \SlimSession\Helper();
+});
 
+AppFactory::setContainer($container);
 
 // Instantiate App
 $app = AppFactory::create();
+
+$app->add(new \Slim\Middleware\Session);
 
 $app->get('/', '\App\Controller\AuthController:login');
 $app->get('/secure', '\App\Controller\SecureController:default');
