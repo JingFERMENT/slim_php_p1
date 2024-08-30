@@ -14,4 +14,9 @@ class SecureController extends Controller {
         return $html;
     }
 
+    public function status (Request $request, Response $response) {
+       $html = $this->render($response, 'status.html');
+       return $html;
+    }
+
 }
