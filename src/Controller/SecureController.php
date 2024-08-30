@@ -8,7 +8,9 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 class SecureController extends Controller {
 
     public function default (Request $request, Response $response) {
-        $html = $this->render($response, 'default.html');
+        $html = $this->render($response, 'default.html', [
+            'user' => $this->ci->get('session')->get('user')
+        ]);
         return $html;
     }
 

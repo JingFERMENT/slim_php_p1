@@ -22,7 +22,7 @@ $container->set('templating', function () {
     ]);
 });
 
-$container->set('session', function(){
+$container->set('session', function () {
     return new \SlimSession\Helper();
 });
 
@@ -33,8 +33,11 @@ $app = AppFactory::create();
 
 $app->add(new \Slim\Middleware\Session);
 
-$app->get('/', '\App\Controller\AuthController:login');
-$app->get('/secure', '\App\Controller\SecureController:default');
+$app->any('/', '\App\Controller\AuthController:login');
+$app->get('/secure', '\App\Controller\SecureController:default')
+->add(new \App\Middleware\Authenticate($app->getContainer()->get('session')));
+$app->get('/logout', '\App\Controller\AuthController:logout');
+
 
 // $app->get('/', '\App\Controller\ShopController:default');
 // // handle when the details is not numeric
